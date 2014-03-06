@@ -1,0 +1,37 @@
+{
+  "name": "grunt-commit-message-verify",
+  "description": "Verifies that the HEAD Git commit conforms to imposed length & regex restrictions",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jakub-g/grunt-commit-message-verify",
+  "author": {
+    "name": "jakub-g",
+    "email": "jakub.g.opensource@gmail.com",
+    "url": "http://jakub-g.github.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jakub-g/grunt-commit-message-verify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jakub-g/grunt-commit-message-verify/issues"
+  },
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "https://github.com/jakub-g/grunt-commit-message-verify/blob/master/LICENSE"
+    }
+  ],
+  "bin": "bin/grunt-commit-message-verify",
+  "engines": {
+    "node": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin",
+    "git",
+    "commit",
+    "verify"
+  ]
+}
