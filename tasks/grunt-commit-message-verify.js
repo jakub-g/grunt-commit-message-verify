@@ -9,10 +9,10 @@ var exec = require('child_process').exec;
 
 var checkCommit = require("../lib/check-commit-message");
 
-var shellCommand = "git log -1 --pretty=%B";
+var shellCommand = "git log --format=%B --no-merges -n 1";
 
 /**
- * Check if last commit message conforms to standards.<br>
+ * Check if last non-merge commit message conforms to standards.<br>
  * Config is read from grunt.config.get('grunt-commit-message-verify')
  */
 module.exports = function (grunt) {
@@ -77,6 +77,8 @@ module.exports = function (grunt) {
             // error reporting
             var ok = (errors.length == 0);
             if (ok) {
+                grunt.log.writeln("The commit message was:".yellow);
+                grunt.log.writeln(sMsg);
                 grunt.log.ok();
             } else {
                 grunt.log.warn("Almost there, but the last commit message is not quite okay:".yellow);
