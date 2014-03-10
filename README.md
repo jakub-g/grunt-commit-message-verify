@@ -1,9 +1,17 @@
 # grunt-commit-message-verify
 
-Verifies that the last commit message of the Git repo (of `HEAD`) is compliant to your requirements.
-This is a Grunt plugin, useful mostly in continuous-integration environments (like Travis CI) - since it only checks the `HEAD` commit.
+Verifies that the last commit message [1] of the Git repo [2] is compliant to your requirements.
+This is a Grunt plugin [3], useful mostly in continuous-integration environments (like Travis CI) - since it
+only checks the latest commit.
 
 Tested with NodeJS 0.8 / Grunt 0.4.2.
+
+Notes:
+
+1. To be precise, **youngest non-merge** commit. See the default shell command.
+2. you can customize the shell command to be run, to use it with any DCVS or really any string fed to the program via `stdin`
+3. you can also use it outside Grunt in pure NodeJS script:
+`require('grunt-commit-message-verify/lib/check-commit-message.js')` and then use the methods exposed.
 
 ### Rationale
 
@@ -24,14 +32,19 @@ Then add this line to your project's `Gruntfile.js`:
 
     grunt.loadNpmTasks('grunt-commit-message-verify');
 
-### Config example
+### Config options
+
+The names of the entries should be self-explanatory.
+
+`shellCommand` is the command that will be run by your shell to obtain the commit message
+(it should print it to `stdout`).
 
     grunt.config.set('grunt-commit-message-verify', {
         minLength : 0,
         maxLength : 3000,
         minFirstLineLength : 20, // first line should be both concise and informative
         maxFirstLineLength : 60,
-        maxLineLength : 80,      // this is to prevent overflows in console and Github UI
+        maxLineLength : 80,      // this is a good default to prevent overflows in shell console and Github UI
         regexes : {
             "check start of the commit" : {
                 // the commit is either a fix, a feature, a documentation fix, a refactoring, new release commit, or
@@ -44,12 +57,13 @@ Then add this line to your project's `Gruntfile.js`:
                 regex : /(((close|resolve)(s|d)?)|fix(e(s|d))?) #\d+/i,
                 explanation : "The commit should contain sth like fix #123 or close #123 somewhere"
             }
-        }
+        },
+        shellCommand : "git log --format=%B --no-merges -n 1"    // this is the default used if nothing is passed
     });
 
-The commit will be checked for its length according to min/max settings. `0` means to skip the check (this is the default).
+The commit message will be checked for its length according to min/max settings. `0` means to skip the check (this is the default for all the min/max length settings).
 
-**The automagical exception is that commit messages of a format `1.2.3` or `v1.2.3` will not be checked for length.**
+**The automagical exception is that commit messages of a format `1.2.3` or `v1.2.3` will never be checked for length.**
 
 Also, the commit will be checked against the regexes defined in `regexes` node. The key in this object is a short user-friendly
 name of the check, and the value can either be a `RegExp` or an object literal with `regex` (RegExp) and `explanation` (String).

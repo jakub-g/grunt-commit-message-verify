@@ -8,7 +8,7 @@
 var exec = require('child_process').exec;
 var checkCommit = require("../lib/check-commit-message");
 
-var shellCommand = "git log --format=%B --no-merges -n 1";
+var defaultShellCommand = "git log --format=%B --no-merges -n 1";
 
 /**
  * Check if last non-merge commit message conforms to standards.<br>
@@ -26,6 +26,7 @@ module.exports = function (grunt) {
             return false;
         }
 
+        var shellCommand = cfg.shellCommand || defaultShellCommand;
         var done = this.async();
         var childproc = exec(shellCommand, function (error, stdout, stderr) {
             if (error || stderr || this.errorCount) {
