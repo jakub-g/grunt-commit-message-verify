@@ -9,8 +9,8 @@ Tested with NodeJS 0.8 / Grunt 0.4.2.
 Notes:
 
 1. To be precise, **youngest non-merge** commit. See the default shell command.
-2. you can customize the shell command to be run, to use it with any DCVS or really any string fed to the program via `stdin`
-3. you can also use it outside Grunt in pure NodeJS script:
+2. You can customize the shell command to be run, to use it with any VCS or actually any string fed to the program via `stdin`
+3. You can also use it outside Grunt in pure NodeJS script:
 `require('grunt-commit-message-verify/lib/check-commit-message.js')` and then use the methods exposed.
 
 ### Rationale
@@ -32,7 +32,7 @@ Then add this line to your project's `Gruntfile.js`:
 
     grunt.loadNpmTasks('grunt-commit-message-verify');
 
-### Config options
+## Config options
 
 The names of the entries should be self-explanatory.
 
@@ -69,6 +69,8 @@ Also, the commit will be checked against the regexes defined in `regexes` node. 
 name of the check, and the value can either be a `RegExp` or an object literal with `regex` (RegExp) and `explanation` (String).
 The key, the regex, and the explanation (if present) will be printed in case of failure to guide the user how to fix the problem.
 
+## Output
+
 A typical log in case of failure will look like this (will be colored):
 
     Running "grunt-commit-message-verify" task
@@ -94,6 +96,14 @@ A typical log in case of failure will look like this (will be colored):
     >> Use git commit --amend to improve the commit message.
     >> Hint: use http://www.regexper.com to visualize the regex.
     Warning: Task "grunt-commit-message-verify" failed. Use --force to continue.
+
+## Using this checker as a Git hook
+
+Have a look at `./git-hooks/commit-msg` file. Customize the `cfgOrigin` variable, and then put the file in your
+`./.git/hooks` folder.
+
+The mentioned file contains a hack to read the config straight from your Gruntfile, provided it's written in a
+certain way. You may of course tweak it to read the config directly from some other file.
 
 ## Contributing
 Feel invited to contribute to the project.
