@@ -1,7 +1,7 @@
 {
   "name": "grunt-commit-message-verify",
   "description": "Verifies that the HEAD Git commit conforms to imposed length & regex restrictions",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://github.com/jakub-g/grunt-commit-message-verify",
   "author": {
     "name": "jakub-g",
