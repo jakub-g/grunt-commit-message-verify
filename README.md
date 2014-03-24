@@ -61,6 +61,11 @@ The names of the entries should be self-explanatory.
             }
         },
 
+        // If true, then lines starting with a tab or two spaces won't be checked for length
+        // This is to allow embedding of unchanged source code etc.
+        // This setting does not apply to the first line. Default is false
+        skipCheckAfterIndent : false,
+
         // this is the default used if nothing is passed
         shellCommand : "git log --format=%B --no-merges -n 1"
     });
