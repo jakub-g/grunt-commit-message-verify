@@ -69,6 +69,12 @@ module.exports = function (grunt) {
                 if (someRegexFailed) {
                     grunt.log.warn("Hint: use http://www.regexper.com to visualize the regexes.");
                 }
+
+                // Additional user-defined message on error
+                if (cfg.messageOnError) {
+                    grunt.log.writeln();
+                    grunt.log.write(cfg.messageOnError);
+                }
             }
             done(ok);
         });

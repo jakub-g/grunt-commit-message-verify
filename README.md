@@ -70,7 +70,12 @@ The names of the entries should be self-explanatory.
         // and then write a longer explanation. Some tools like `git log --oneline` treat all the content
         // until the first empty line as the first line (space-separated), hence it could be useful
         // to enforce this setting
-        forceSecondLineEmpty : false
+        forceSecondLineEmpty : false,
+
+        // Additional message to print in case of any failure
+        // Useful to hint the user how to fix the error etc.
+        // It could contain info how to run the manual check or how to install commit hooks.
+        messageOnError : "",
 
         // this is the default used if nothing is passed
         shellCommand : "git log --format=%B --no-merges -n 1"
