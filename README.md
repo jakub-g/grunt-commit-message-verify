@@ -36,15 +36,17 @@ Then add this line to your project's `Gruntfile.js`:
 
 The names of the entries should be self-explanatory.
 
-`shellCommand` is the command that will be run by your shell to obtain the commit message
-(it should print it to `stdout`).
-
     grunt.config.set('grunt-commit-message-verify', {
         minLength : 0,
         maxLength : 3000,
-        minFirstLineLength : 20, // first line should be both concise and informative
+
+        // first line should be both concise and informative
+        minFirstLineLength : 20,
         maxFirstLineLength : 60,
-        maxLineLength : 80,      // this is a good default to prevent overflows in shell console and Github UI
+
+        // this is a good default to prevent overflows in shell console and Github UI
+        maxLineLength : 80,
+
         regexes : {
             "check start of the commit" : {
                 // the commit is either a fix, a feature, a documentation fix, a refactoring, new release commit, or
@@ -58,7 +60,9 @@ The names of the entries should be self-explanatory.
                 explanation : "The commit should contain sth like fix #123 or close #123 somewhere"
             }
         },
-        shellCommand : "git log --format=%B --no-merges -n 1"    // this is the default used if nothing is passed
+
+        // this is the default used if nothing is passed
+        shellCommand : "git log --format=%B --no-merges -n 1"
     });
 
 The commit message will be checked for its length according to min/max settings. `0` means to skip the check (this is the default for all the min/max length settings).
@@ -68,6 +72,9 @@ The commit message will be checked for its length according to min/max settings.
 Also, the commit will be checked against the regexes defined in `regexes` node. The key in this object is a short user-friendly
 name of the check, and the value can either be a `RegExp` or an object literal with `regex` (RegExp) and `explanation` (String).
 The key, the regex, and the explanation (if present) will be printed in case of failure to guide the user how to fix the problem.
+
+`shellCommand` is the command that will be run by your shell to obtain the commit message
+(it should print it to `stdout`).
 
 ## Output
 
