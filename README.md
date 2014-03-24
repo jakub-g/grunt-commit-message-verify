@@ -66,6 +66,12 @@ The names of the entries should be self-explanatory.
         // This setting does not apply to the first line. Default is false
         skipCheckAfterIndent : false,
 
+        // A known Git convention is to have short 1st line of the message, leave 2nd line empty
+        // and then write a longer explanation. Some tools like `git log --oneline` treat all the content
+        // until the first empty line as the first line (space-separated), hence it could be useful
+        // to enforce this setting
+        forceSecondLineEmpty : false
+
         // this is the default used if nothing is passed
         shellCommand : "git log --format=%B --no-merges -n 1"
     });
